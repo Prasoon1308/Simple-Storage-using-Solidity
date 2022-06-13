@@ -51,7 +51,41 @@ contract FundMe{
     //     return ethAmountInUsd;
     // }
 
+    address public owner;
+    constructor(){
+        owner = msg.sender;
+    }
+    modifier onlyOwner{
+        require(msg.sender == owner, "Sender is not the Owner!");
+        // double '=' indicates checking of the equation and single indicates the value change.
+        _;
+        // this indicates first run the modifier then the function.
+    }
+
     function withdraw() public{
-        
+        // require(msg.sender == owner);
+
+        // (starting index; ending index; setp amount)
+        for(uint256 funderIndex=0; funderIndex<funders.length; funderIndex++){
+            address funder = funders[funderIndex];
+            addressToAmountFunded[funder]=0;
+        }
+        //reset the array as we have withdrawn the money
+        funders = new address[](0);
+        //'0' here indicates that the new address will have to start again from zero.
+
+        // // 1. transfer (2300 gas, throws error)
+        // payable(msg.sender).transfer(address(this).balance);
+        // // msg.sender => address
+        // // payable(msg.sender) => payable address
+
+        // // 2. send(2300 gas, returns bool)
+        // bool sendSuccess = payable(msg.sender).send(address(this).balance);
+        // require(sendSuccess, "Send Failed!");
+
+        // 3. call(forward all gas or set gas, returns bool) =>recommended way
+        // (bool callSuccess, bytes memory dataReturned) = payable(msg.sender).call{value: address(this).balance}("");
+        (bool callSuccess, ) = payable(msg.sender).call{value: address(this).balance}("");
+        require(callSuccess, "Call Failed!");
     }
 }
