@@ -11,7 +11,7 @@ library PriceConverter{
             // (Rinkeby chain address)
             AggregatorV3Interface priceFeed = AggregatorV3Interface(0x8A753747A1Fa494EC906cE90E9f37563A8AF630e);
             (, int price,,,) = priceFeed.latestRoundData();
-            // visit: https://docs.chain.link/docs/get-the-latest-price/ for the texts between the commas.
+            // visit: https://docs.chain.link/docs/price-feeds-api-reference/ for the texts between the commas.
             // prices are in int as some of them can be negative.
             // ETH in terms of USD
             // 3000.00000000
