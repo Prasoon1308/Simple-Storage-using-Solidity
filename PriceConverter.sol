@@ -2,6 +2,7 @@
 pragma solidity ^0.8.8;
 
 import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
+// this ABI defines the external functions implemented by Data Feeds
 
 library PriceConverter{
     function getPrice() internal view returns(uint256){
