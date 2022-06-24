@@ -15,7 +15,7 @@ contract FundMe{
     mapping(address=>uint256) public addressToAmountFunded;
 
     function fund() public payable{
-        // Want to be able to set a minimu fund amount in USD
+        // Want to be able to set a minimum fund amount in USD
         // Step 1: How do we send ETH to this contract?
 
         // require(msg.value >= minimumUsd, "Didn't send enough!");
